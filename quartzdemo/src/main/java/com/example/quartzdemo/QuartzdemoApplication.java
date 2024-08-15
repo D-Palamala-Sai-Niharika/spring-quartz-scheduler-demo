@@ -4,7 +4,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
-import com.example.quartzdemo.service.PrintDateTimeInitializer;
+import com.example.quartzdemo.service.PrintDateTimeJobInitializer;
+import com.example.quartzdemo.service.WeatherUpdateJobInitializer;
 
 @SpringBootApplication
 public class QuartzdemoApplication {
@@ -13,8 +14,12 @@ public class QuartzdemoApplication {
 		ConfigurableApplicationContext applicationContext=SpringApplication.run(QuartzdemoApplication.class, args);
 		
 		// Initialize PrintDateTime Job
-		PrintDateTimeInitializer printDateTimeInitializer=applicationContext.getBean(PrintDateTimeInitializer.class);
+		PrintDateTimeJobInitializer printDateTimeInitializer=applicationContext.getBean(PrintDateTimeJobInitializer.class);
 		printDateTimeInitializer.printDateTimeInitializerSetJobDetail();
+		
+		// Initialize WeatherUpdate Job
+		WeatherUpdateJobInitializer weatherUpdateJobInitializer=applicationContext.getBean(WeatherUpdateJobInitializer.class);
+		weatherUpdateJobInitializer.weatherUpdateJobInitializerSetJobDetail();
 	}
 
 }

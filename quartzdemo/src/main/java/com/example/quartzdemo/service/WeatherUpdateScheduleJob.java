@@ -3,6 +3,7 @@ package com.example.quartzdemo.service;
 import org.quartz.CronScheduleBuilder;
 import org.quartz.CronTrigger;
 import org.quartz.JobBuilder;
+import org.quartz.JobDataMap;
 import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SchedulerException;
@@ -13,38 +14,48 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.stereotype.Service;
 
+import com.example.quartzdemo.constant.WeatherConstants;
+
 @Service
-public class PrintDateTimeScheduleJob {
+public class WeatherUpdateScheduleJob {
 	
-	private static final Logger logger=LoggerFactory.getLogger(PrintDateTimeScheduleJob.class);
+	public static final Logger logger=LoggerFactory.getLogger(WeatherUpdateScheduleJob.class);
 	
 	@Autowired
 	Scheduler quartzScheduler;
 	
 	JobDetail jobDetail;
-	CronTrigger trigger;
-
+	CronTrigger cronTrigger;
+	
 	public void setJobDetail(String jobName, String jobGroup, String cronExpression, Class<? extends QuartzJobBean> jobClass) {
 		
-		//create job detail
+		logger.info("Inside setJobDetail : jobName : {}, jobGroup : {},cronExpression : {}, jobClass : {}",jobName,jobGroup,cronExpression,jobClass);
+		
+		//set jobDataMap
+		JobDataMap map=new JobDataMap();
+		map.put("latitude", WeatherConstants.latitude);
+		map.put("longitude", WeatherConstants.longitude);
+		
+		//set job detail
 		jobDetail=JobBuilder.newJob(jobClass)
 				.withIdentity(jobName, jobGroup)
+				.setJobData(map)
 				.storeDurably(false)
 				.build();
 		
-		//create cron trigger
-		trigger=TriggerBuilder.newTrigger()
+		//set trigger
+		cronTrigger=TriggerBuilder.newTrigger()
 				.withIdentity(jobName, jobGroup)
 				.withSchedule(CronScheduleBuilder.cronSchedule(cronExpression))
 				.build();
 		
+		//schedule job
 		try {
-			quartzScheduler.scheduleJob(jobDetail, trigger);
-			logger.info("Print Date Time Job has been scheduled : {}, {}",jobDetail,trigger);
+			quartzScheduler.scheduleJob(jobDetail, cronTrigger);
+			logger.info("Weather Update Job has been scheduled : {}, {}",jobDetail,cronTrigger);
 		}catch(SchedulerException e) {
 			logger.error("Unable to schedule Job : {}", e.getStackTrace());
 		}
-		
 	}
 
 }

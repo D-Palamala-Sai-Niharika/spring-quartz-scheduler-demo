@@ -19,9 +19,9 @@ public class PrintDateTimeJob extends QuartzJobBean {
 	protected void executeInternal(JobExecutionContext context) throws JobExecutionException {
 		try {
 			String currentDateTime=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date());
-			logger.info("Current Date and Time : {}", currentDateTime );	
+			logger.info("Current Date and Time : {}", currentDateTime);	
 		}catch(Exception e) {
-			logger.error("Unable to fetch Date and Time");
+			logger.error("Unable to fetch Date and Time", e.getStackTrace());
 		}
 	}
 }
