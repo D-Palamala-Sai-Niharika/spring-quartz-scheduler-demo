@@ -16,7 +16,7 @@ public class QuartzdemoApplication {
 		// Initialize PrintDateTime Job
 		PrintDateTimeJobInitializer printDateTimeInitializer=applicationContext.getBean(PrintDateTimeJobInitializer.class);
 		printDateTimeInitializer.printDateTimeInitializerSetJobDetail();
-		
+
 		// Initialize WeatherUpdate Job
 		WeatherUpdateJobInitializer weatherUpdateJobInitializer=applicationContext.getBean(WeatherUpdateJobInitializer.class);
 		weatherUpdateJobInitializer.weatherUpdateJobInitializerSetJobDetail();
