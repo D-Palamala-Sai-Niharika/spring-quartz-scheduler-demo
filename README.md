@@ -9,6 +9,7 @@ Resources Referred:
   - https://medium.com/@seonggil/learn-about-the-quartz-scheduler-73f6f588fa0
 - Spring Boot Scheduler - https://wankhedeshubham.medium.com/want-to-execute-task-on-scheduled-period-spring-boot-scheduler-f9c1e71ba165
 - Email Scheduling
-  - https://kajalrawal.medium.com/spring-boot-quartz-scheduler-example-email-scheduling-application-77598089a049
+  - https://kajalrawal.medium.com/spring-boot-quartz-scheduler-example-email-scheduling-application-
+  - https://www.callicoder.com/spring-boot-quartz-scheduler-email-scheduling-example/
   - https://www.youtube.com/watch?v=jcohAIaSy2M&list=PLjxZxD6BDkeZLbkPNgGxZklwPdhIAuYqV
 - ChatGPT
